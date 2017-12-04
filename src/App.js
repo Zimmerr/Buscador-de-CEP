@@ -40,17 +40,23 @@ class App extends React.Component {
      //   console.log('parsed json', responseJson);
      // })
       .then((responseJson) => {
-        console.log('parsed json', responseJson);
-        var nomezera = (
-        "CEP: " + responseJson.cep +
-        "; Logradouro: " + responseJson.logradouro +
-        //"; Complemento: " + responseJson.complemento +
-        "; Bairro: " + responseJson.bairro +
-        "; Cidade: " + responseJson.localidade +
-        "; UF: " + responseJson.uf 
-        );
-        this.setState({nome: nomezera})
-        this.addItem();
+        //console.log('parsed json', responseJson);
+        
+        if(responseJson.cep != undefined){
+          var nomezera = (
+          "CEP: " + responseJson.cep +
+          "; Logradouro: " + responseJson.logradouro +
+          //"; Complemento: " + responseJson.complemento +
+          "; Bairro: " + responseJson.bairro +
+          "; Cidade: " + responseJson.localidade +
+          "; UF: " + responseJson.uf 
+          );
+          this.setState({nome: nomezera})
+          this.addItem();
+        }
+        else{
+          alert("O CEP especificado não existe!")
+        }
         
       })
       .catch((error) => {
@@ -91,8 +97,14 @@ class App extends React.Component {
         var resposta = this.teste(link);
         //alert(data.logradouro);
       }
+      else{
+        alert("Esse não é um CEP válido!");
+      }
     }
-     //error here
+    else{
+        alert("Esse não é um CEP válido!");
+      }
+     
     event.preventDefault();
   }
 
